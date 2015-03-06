@@ -38,27 +38,30 @@ public class BallDemo
         // crate and show the balls
         balls = new BouncingBall[numeroDeBolas]; //Se crea un array para meter tantas bolas
         //como el nº q se indica por parametro
-        
+
         Random diametro = new Random();
         Random colores = new Random();
         Random xposition = new Random();
         Random yposition = new Random();
+
+        Random r = new Random();
+        Random g = new Random();
+        Random v = new Random();
         
-        Color col[]= new Color[3];
-        col[0] = Color.RED;
-        col[1] = Color.BLUE;
-        col[2] = Color.GREEN;
+
         for(int i = 0; i<numeroDeBolas; i++)
         {
-            balls[i] = new BouncingBall(xposition.nextInt(60), yposition.nextInt(60), diametro.nextInt(30), col[colores.nextInt(2)], ground, myCanvas);
+            Color colo = new Color(r.nextInt(255), g.nextInt(255), v.nextInt(255));
+            balls[i] = new BouncingBall(xposition.nextInt(60), yposition.nextInt(60), (diametro.nextInt(30)+5), colo, ground, myCanvas);
         }
 
         // make them bounce
         boolean finished =  false;
         while(!finished) {
+            myCanvas.wait(50);           // small delay
             for(int x = 0; x<balls.length; x++)
             {
-                myCanvas.wait(50);           // small delay
+
                 balls[x].move();
                 if(balls[balls.length - 1].getXPosition() >= 550) {
                     finished = true;
